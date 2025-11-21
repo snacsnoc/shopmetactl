@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shopify-metaobject-cli"
+version = "0.1.0"
+description = "CLI for browsing Shopify metaobjects"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "typer>=0.12.3",
+    "rich>=13.7.1",
+    "requests>=2.32.3",
+    "pydantic>=2.7.4",
+    "textual>=0.58.0"
+]
+authors = [
+    { name = "Shopify Metaobject CLI" }
+]
+
+[project.scripts]
+shopmetactl = "shopmeta.cli:app"
+
+[tool.typer]
+color = true
