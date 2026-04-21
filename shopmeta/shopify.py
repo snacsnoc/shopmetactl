@@ -38,7 +38,10 @@ class ShopifyClient:
         self, query: str, variables: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
         payload = {"query": query, "variables": variables or {}}
-        response = self.session.post(self.endpoint, json=payload, timeout=30)
+        try:
+            response = self.session.post(self.endpoint, json=payload, timeout=30)
+        except requests.RequestException as exc:
+            raise ShopifyAPIError(f"Network error: {exc}") from exc
         if response.status_code >= 400:
             raise ShopifyAPIError(f"HTTP {response.status_code}: {response.text}")
 
