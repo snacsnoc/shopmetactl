@@ -42,7 +42,12 @@ class ShopifyClient:
         if response.status_code >= 400:
             raise ShopifyAPIError(f"HTTP {response.status_code}: {response.text}")
 
-        data = response.json()
+        try:
+            data = response.json()
+        except json.JSONDecodeError as exc:
+            raise ShopifyAPIError(
+                f"Invalid JSON response (HTTP {response.status_code}): {response.text[:200]}"
+            ) from exc
         errors = data.get("errors")
         if errors:
             raise ShopifyAPIError(json.dumps(errors, indent=2))
