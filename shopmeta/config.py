@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import stat
 from pathlib import Path
 from typing import Optional
 
@@ -60,5 +61,7 @@ def load_config() -> Optional[Config]:
 
 def save_config(config: Config) -> Path:
     CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+    CONFIG_DIR.chmod(0o700)
     CONFIG_PATH.write_text(config.model_dump_json(indent=2), encoding="utf-8")
+    CONFIG_PATH.chmod(0o600)
     return CONFIG_PATH
