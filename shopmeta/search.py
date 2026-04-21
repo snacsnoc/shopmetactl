@@ -57,7 +57,7 @@ def parse_search_query(raw: str, *, type_only: bool = False) -> SearchQuery:
         normalized = text
 
     if normalized.startswith(TYPE_PREFIX):
-        type_value = normalized[len(TYPE_PREFIX) :]
+        type_value = normalized[len(TYPE_PREFIX) :].lower()
         if "." in type_value:
             namespace_pattern, key_pattern = type_value.split(".", 1)
         else:
