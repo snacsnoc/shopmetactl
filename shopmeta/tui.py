@@ -219,3 +219,6 @@ class MetaobjectSearchApp(App[None]):
         self.set_status(str(message.error), style="red")
         self.detail_tree.root.label = "Error"
         self.detail_tree.refresh()
+        self._entries = []
+        self._entry_map = {}
+        self.results_view.clear()
