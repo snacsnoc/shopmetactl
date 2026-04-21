@@ -227,6 +227,7 @@ def meta_dump(
         "definition": {k: v for k, v in definition.items() if k != "metaobjects"},
         "entries": definition.get("metaobjects", {}).get("nodes", []),
     }
+    output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     console.print(
         Panel(
